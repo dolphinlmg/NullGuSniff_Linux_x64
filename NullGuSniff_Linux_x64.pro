@@ -4,4 +4,12 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp
+    Class/Packet/ethernet.cpp \
+    Class/Packet/ip.cpp \
+        Class/Packet/packet.cpp \
+        main.cpp \
+
+HEADERS += \
+    Class/Packet/ethernet.h \
+    Class/Packet/ip.h \
+    Class/Packet/packet.h
