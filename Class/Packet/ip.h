@@ -11,9 +11,9 @@ public:
     IP(const uint8_t* data, size_t len);
     iphdr* getIPData();
     uint32_t getDst();
-    void setDst();
+    void setDst(uint32_t addr);
     uint32_t getSrc();
-    void setSrc();
+    void setSrc(uint32_t addr);
     uint8_t getProtocol();
 
 private:
