@@ -9,8 +9,8 @@ public:
     n_TCP();
     n_TCP(u_int8_t* data, size_t len);
     n_TCP(const u_int8_t* data, size_t len);
-    tcphdr* getTcpData();
-    std::string what() override { return "TCP"; }
+    tcphdr* getTcpData() const;
+    std::string what() const override { return "TCP"; }
     //TODO: Add Methods
 
 private:

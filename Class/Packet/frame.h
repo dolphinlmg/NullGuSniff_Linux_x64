@@ -12,10 +12,10 @@ public:
     Frame(const uint8_t* data, size_t len);
     virtual ~Frame();
     void setLength(size_t len);
-    size_t getLength();
+    size_t getLength() const ;
     void setFrameData(uint8_t* data, size_t len);
-    uint8_t* getFrameData();
-    virtual std::string what() { return "Frame"; }
+    uint8_t* getFrameData() const ;
+    virtual std::string what() const { return "Frame"; }
 
 private:
     size_t length;

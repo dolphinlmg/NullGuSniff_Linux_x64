@@ -9,14 +9,14 @@ public:
     Ethernet();
     Ethernet(uint8_t* data, size_t len);
     Ethernet(const uint8_t* data, size_t len);
-    ether_header* getEthernetHeader();
-    uint8_t* getEthDst();
+    ether_header* getEthernetHeader() const ;
+    uint8_t* getEthDst() const ;
     void setEthDst(uint8_t* dst);
-    uint8_t* getEthSrc();
+    uint8_t* getEthSrc() const ;
     void setEthSrc(uint8_t* src);
-    uint16_t getEthType();
+    uint16_t getEthType() const ;
     void setEthType(uint16_t eth_type);
-    std::string what() override { return "Ethernet"; }
+    std::string what() const override { return "Ethernet"; }
 
 private:
     ether_header* ethernet_data;

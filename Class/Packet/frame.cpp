@@ -25,7 +25,7 @@ void Frame::setLength(size_t len){
     this->length = len;
 }
 
-size_t Frame::getLength(){
+size_t Frame::getLength() const {
     return this->length;
 }
 
@@ -37,6 +37,6 @@ void Frame::setFrameData(uint8_t* data, size_t len){
     memcpy(this->data, data, len);
 }
 
-uint8_t* Frame::getFrameData(){
+uint8_t* Frame::getFrameData() const {
     return this->data;
 }

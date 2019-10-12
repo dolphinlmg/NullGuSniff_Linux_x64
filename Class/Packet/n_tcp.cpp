@@ -10,6 +10,6 @@ n_TCP::n_TCP(const u_int8_t* data, size_t len) : IP(data, len) {
     this->tcp_data = reinterpret_cast<tcphdr*>(this->getIPData() + this->getSizeOfIPHeader());
 }
 
-tcphdr* n_TCP::getTcpData() {
+tcphdr* n_TCP::getTcpData() const {
     return this->tcp_data;
 }
