@@ -9,8 +9,8 @@
 class n_Packet {
 public:
     n_Packet();
-    static n_Frame* recognizePacket(const uint8_t* data, size_t len);
-    static std::string dumpPacket(const uint8_t* data, size_t len);
+    static n_Frame* recognizePacket(const uint8_t* data, int len);
+    static std::string dumpPacket(const uint8_t* data, int len);
 
 };
 

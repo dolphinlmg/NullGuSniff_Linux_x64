@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 // return suitable packet object with const uint8_t*
-n_Frame* n_Packet::recognizePacket(const uint8_t* data, size_t len) {
+n_Frame* n_Packet::recognizePacket(const uint8_t* data, int len) {
     n_Frame* ret = new n_Ethernet(data, len);
     if (dynamic_cast<n_Ethernet*>(ret)->getEthType() == ntohs(0x0800)){
         delete ret;
@@ -44,7 +44,7 @@ inline void hex_dump(const void* aData, std::size_t aLength, std::basic_ostream<
                         aStream << " ";
                     aStream.width(2);
                     aStream.fill('0');
-                    aStream << std::hex << std::uppercase << static_cast<int>(static_cast<unsigned char>(ch));
+                    aStream << std::hex << static_cast<int>(static_cast<unsigned char>(ch));
                     break;
                 }
             }
@@ -58,8 +58,8 @@ inline void hex_dump(const void* aData, std::size_t aLength, std::basic_ostream<
 }
 
 // dump packet with const uint8_t*
-std::string n_Packet::dumpPacket(const uint8_t* data, size_t len) {
+std::string n_Packet::dumpPacket(const uint8_t* data, int len) {
     std::stringstream ss;
-    hex_dump(data, len, ss);
+    hex_dump(data, static_cast<size_t>(len), ss);
     return ss.str();
 }

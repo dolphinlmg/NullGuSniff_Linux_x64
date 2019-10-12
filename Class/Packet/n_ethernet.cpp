@@ -1,12 +1,12 @@
 #include "n_ethernet.h"
 
 // constructor with uint8_t*
-n_Ethernet::n_Ethernet(uint8_t* data, size_t len) : n_Frame(data, len) {
+n_Ethernet::n_Ethernet(uint8_t* data, int len) : n_Frame(data, len) {
     this->ethernet_data = reinterpret_cast<ether_header*>(this->getFrameData());
 }
 
 // constructor with const uint8_t*
-n_Ethernet::n_Ethernet(const uint8_t* data, size_t len) : n_Frame(data, len) {
+n_Ethernet::n_Ethernet(const uint8_t* data, int len) : n_Frame(data, len) {
     this->ethernet_data = reinterpret_cast<ether_header*>(this->getFrameData());
 }
 

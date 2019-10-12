@@ -35,8 +35,8 @@ const uint8_t* n_Pcap::getPacketData() {
 }
 
 // return packet length
-size_t n_Pcap::getPacketLength(){
+int n_Pcap::getPacketLength(){
     if (this->header != nullptr)
-        return this->header->len;
+        return static_cast<int>(this->header->len);
     return 0;
 }

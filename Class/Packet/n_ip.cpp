@@ -1,12 +1,12 @@
 #include "n_ip.h"
 
 // constructor with uint8_t*
-n_IP::n_IP(uint8_t* data, size_t len) : n_Ethernet (data, len){
+n_IP::n_IP(uint8_t* data, int len) : n_Ethernet (data, len){
     this->ip_data = reinterpret_cast<iphdr*>(this->getFrameData() + sizeof(ether_header));
 }
 
 // constructor with const uint8_t*
-n_IP::n_IP(const uint8_t* data, size_t len) : n_Ethernet (data, len){
+n_IP::n_IP(const uint8_t* data, int len) : n_Ethernet (data, len){
     this->ip_data = reinterpret_cast<iphdr*>(this->getFrameData() + sizeof(ether_header));
 }
 

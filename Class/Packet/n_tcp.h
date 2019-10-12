@@ -6,8 +6,8 @@
 class n_TCP : public n_IP
 {
 public:
-    n_TCP(uint8_t* data, size_t len);
-    n_TCP(const uint8_t* data, size_t len);
+    n_TCP(uint8_t* data, int len);
+    n_TCP(const uint8_t* data, int len);
     tcphdr* getTcpData() const;
     std::string what() const override { return "TCP"; }
     //TODO: Add Methods

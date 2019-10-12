@@ -14,7 +14,7 @@ public:
     int getNextPacket();
     pcap_pkthdr* getPacketHeader();
     const uint8_t* getPacketData();
-    size_t getPacketLength();
+    int getPacketLength();
 
 private:
     pcap_t* handle;
