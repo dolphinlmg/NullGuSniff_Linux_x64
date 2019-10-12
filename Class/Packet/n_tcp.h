@@ -9,6 +9,8 @@ public:
     n_TCP(uint8_t* data, int len);
     n_TCP(const uint8_t* data, int len);
     tcphdr* getTcpData() const;
+    int getSizeOfTcpHeader() const;
+    bool isTLS() const;
     std::string what() const override { return "TCP"; }
     //TODO: Add Methods
 

@@ -14,7 +14,7 @@ public:
     uint32_t getSrc() const ;
     void setSrc(uint32_t addr);
     uint8_t getProtocol() const ;
-    size_t getSizeOfIPHeader() const ;
+    int getSizeOfIPHeader() const ;
     std::string what() const override { return "IP"; }
 
 private:

@@ -41,6 +41,6 @@ uint8_t n_IP::getProtocol() const {
 }
 
 // set protocol number of ip header
-size_t n_IP::getSizeOfIPHeader() const {
-    return this->ip_data->ihl * 4;
+int n_IP::getSizeOfIPHeader() const {
+    return (this->ip_data->ihl & 0xf) * 4;
 }
