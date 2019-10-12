@@ -23,6 +23,8 @@ int n_TCP::getSizeOfTcpHeader() const {
 
 // return is this packet is tls
 bool n_TCP::isTLS() const {
+    if (this->getLength() == static_cast<int>(sizeof(ethhdr)) + this->getSizeOfIPHeader() + this->getSizeOfTcpHeader())
+        return false;
     uint8_t* tmp = reinterpret_cast<uint8_t*>(this->getTcpData()) + this->getSizeOfTcpHeader();
     return (*tmp >= 0x14) && (*tmp <= 0x17);
 }
