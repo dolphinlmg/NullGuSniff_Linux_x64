@@ -8,14 +8,19 @@ class n_Pcap
 public:
     n_Pcap(const char* dev);
     ~n_Pcap();
-    pcap_t* getHandle() { return this->handle; }
+    pcap_t* getHandle() const { return this->handle; }
     char* getErrorBuf() { return this->errBuf; }
-    int sendPacket(const uint8_t* packet_content, int len);
-    int getNextPacket(struct pcap_pkthdr** pkHeader, const uint8_t** pkData);
+    int sendPacket(const uint8_t* packet_content, int len) const ;
+    int getNextPacket();
+    pcap_pkthdr* getPacketHeader();
+    const uint8_t* getPacketData();
+    size_t getPacketLength();
 
 private:
     pcap_t* handle;
     char errBuf[PCAP_ERRBUF_SIZE];
+    pcap_pkthdr* header;
+    const uint8_t* packet;
 };
 
 #endif // N_PCAP_H

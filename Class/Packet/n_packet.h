@@ -10,7 +10,7 @@ class n_Packet {
 public:
     n_Packet();
     static n_Frame* recognizePacket(uint8_t* data, size_t len);
-    static std::string dumpPacket(uint8_t* data, size_t len);
+    static std::string dumpPacket(const uint8_t* data, size_t len);
 
 };
 
