@@ -15,6 +15,8 @@ public:
     uint32_t getSrc();
     void setSrc(uint32_t addr);
     uint8_t getProtocol();
+    size_t getSizeOfIPHeader();
+    std::string what() override { return "IP"; }
 
 private:
     iphdr* ip_data;

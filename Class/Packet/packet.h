@@ -3,21 +3,12 @@
 
 #include <stdint.h>
 #include <cstring>
+#include "Class/Packet/n_tcp.h"
 
 class Packet {
 public:
     Packet();
-    Packet(uint8_t* data, size_t len);
-    Packet(const uint8_t* data, size_t len);
-    ~Packet();
-    void setLength(unsigned int len);
-    unsigned int getLength();
-    void setPacketData(uint8_t* data, size_t len);
-    uint8_t* getPacketData();
-
-private:
-    unsigned int length;
-    uint8_t* data;
+    static Frame* recognizePacket(uint8_t* data, size_t len);
 };
 
 #endif // PACKET_H

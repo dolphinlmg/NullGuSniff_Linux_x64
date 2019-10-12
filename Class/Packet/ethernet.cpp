@@ -1,15 +1,13 @@
 #include "ethernet.h"
 
-Ethernet::Ethernet() {
-    this->ethernet_data = reinterpret_cast<ether_header*>(this->getPacketData());
+Ethernet::Ethernet(){}
+
+Ethernet::Ethernet(uint8_t* data, size_t len) : Frame(data, len) {
+    this->ethernet_data = reinterpret_cast<ether_header*>(this->getFrameData());
 }
 
-Ethernet::Ethernet(uint8_t* data, size_t len) : Packet(data, len) {
-    this->ethernet_data = reinterpret_cast<ether_header*>(this->getPacketData());
-}
-
-Ethernet::Ethernet(const uint8_t* data, size_t len) : Packet(data, len) {
-    this->ethernet_data = reinterpret_cast<ether_header*>(this->getPacketData());
+Ethernet::Ethernet(const uint8_t* data, size_t len) : Frame(data, len) {
+    this->ethernet_data = reinterpret_cast<ether_header*>(this->getFrameData());
 }
 
 ether_header* Ethernet::getEthernetHeader(){
@@ -39,3 +37,4 @@ uint16_t Ethernet::getEthType(){
 void Ethernet::setEthType(uint16_t eth_type){
     this->ethernet_data->ether_type = eth_type;
 }
+

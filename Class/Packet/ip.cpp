@@ -2,10 +2,10 @@
 
 IP::IP(){}
 IP::IP(uint8_t* data, size_t len) : Ethernet (data, len){
-    this->ip_data = reinterpret_cast<iphdr*>(this->getPacketData() + sizeof(ether_header));
+    this->ip_data = reinterpret_cast<iphdr*>(this->getFrameData() + sizeof(ether_header));
 }
 IP::IP(const uint8_t* data, size_t len) : Ethernet (data, len){
-    this->ip_data = reinterpret_cast<iphdr*>(this->getPacketData() + sizeof(ether_header));
+    this->ip_data = reinterpret_cast<iphdr*>(this->getFrameData() + sizeof(ether_header));
 }
 
 iphdr* IP::getIPData(){
@@ -30,4 +30,7 @@ void IP::setSrc(uint32_t addr){
 
 uint8_t IP::getProtocol(){
     return this->ip_data->protocol;
+}
+size_t IP::getSizeOfIPHeader() {
+    return this->ip_data->ihl * 4;
 }
