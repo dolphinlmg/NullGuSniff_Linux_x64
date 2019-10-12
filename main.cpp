@@ -7,6 +7,7 @@ using namespace std;
 
 int main() {
     n_Pcap pcap_1("wlp0s20f3");
+    n_Pcap dummy("dum0");
 
     while (true){
         int res = pcap_1.getNextPacket();
@@ -16,6 +17,7 @@ int main() {
 
         cout << packet->what() << endl
              << n_Packet::dumpPacket(packet->getFrameData(), packet->getLength()) << endl;
+        dummy.sendPacket(packet->getFrameData(), packet->getLength());
     }
     return 0;
 }
