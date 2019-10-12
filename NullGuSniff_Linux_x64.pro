@@ -5,18 +5,18 @@ CONFIG -= qt
 LIBS += -lpcap
 
 SOURCES += \
-    Class/Packet/ethernet.cpp \
-    Class/Packet/frame.cpp \
-    Class/Packet/ip.cpp \
+    Class/Packet/n_ethernet.cpp \
+    Class/Packet/n_frame.cpp \
+    Class/Packet/n_ip.cpp \
+    Class/Packet/n_packet.cpp \
     Class/Packet/n_tcp.cpp \
-        Class/Packet/packet.cpp \
     Class/n_Pcap/n_pcap.cpp \
         main.cpp
 
 HEADERS += \
-    Class/Packet/ethernet.h \
-    Class/Packet/frame.h \
-    Class/Packet/ip.h \
+    Class/Packet/n_ethernet.h \
+    Class/Packet/n_frame.h \
+    Class/Packet/n_ip.h \
+    Class/Packet/n_packet.h \
     Class/Packet/n_tcp.h \
-    Class/Packet/packet.h \
     Class/n_Pcap/n_pcap.h

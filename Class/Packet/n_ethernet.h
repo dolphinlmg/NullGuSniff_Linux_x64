@@ -2,13 +2,13 @@
 #define ETHERNET_H
 
 #include <net/ethernet.h>
-#include "frame.h"
+#include "n_frame.h"
 
-class Ethernet : public Frame {
+class n_Ethernet : public n_Frame {
 public:
-    Ethernet();
-    Ethernet(uint8_t* data, size_t len);
-    Ethernet(const uint8_t* data, size_t len);
+    n_Ethernet();
+    n_Ethernet(uint8_t* data, size_t len);
+    n_Ethernet(const uint8_t* data, size_t len);
     ether_header* getEthernetHeader() const ;
     uint8_t* getEthDst() const ;
     void setEthDst(uint8_t* dst);

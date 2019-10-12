@@ -1,11 +1,11 @@
-#include "packet.h"
+#include "n_packet.h"
 
-Frame* Packet::recognizePacket(uint8_t* data, size_t len) {
-    Frame* ret = new Ethernet(data, len);
-    if (dynamic_cast<Ethernet*>(ret)->getEthType() == ntohs(0x0800)){
+n_Frame* n_Packet::recognizePacket(uint8_t* data, size_t len) {
+    n_Frame* ret = new n_Ethernet(data, len);
+    if (dynamic_cast<n_Ethernet*>(ret)->getEthType() == ntohs(0x0800)){
         delete ret;
-        ret = new IP(data, len);
-        if (dynamic_cast<IP*>(ret)->getProtocol() == 6){
+        ret = new n_IP(data, len);
+        if (dynamic_cast<n_IP*>(ret)->getProtocol() == 6){
             delete ret;
             ret = new n_TCP(data, len);
         }
@@ -13,7 +13,7 @@ Frame* Packet::recognizePacket(uint8_t* data, size_t len) {
     return ret;
 }
 
-std::string Packet::dumpPacket(uint8_t* data, size_t len) {
+std::string n_Packet::dumpPacket(uint8_t* data, size_t len) {
     std::stringstream stream;
     stream.fill('0');
     stream.width(2);

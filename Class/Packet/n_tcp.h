@@ -1,9 +1,9 @@
 #ifndef N_TCP_H
 #define N_TCP_H
 #include <netinet/tcp.h>
-#include "Class/Packet/ip.h"
+#include "n_ip.h"
 
-class n_TCP : public IP
+class n_TCP : public n_IP
 {
 public:
     n_TCP();

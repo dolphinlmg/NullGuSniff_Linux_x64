@@ -1,14 +1,14 @@
-#ifndef IP_H
-#define IP_H
+#ifndef n_IP_H
+#define n_IP_H
 #include <netinet/ip.h>
-#include "ethernet.h"
+#include "n_ethernet.h"
 
-class IP : public Ethernet
+class n_IP : public n_Ethernet
 {
 public:
-    IP();
-    IP(uint8_t* data, size_t len);
-    IP(const uint8_t* data, size_t len);
+    n_IP();
+    n_IP(uint8_t* data, size_t len);
+    n_IP(const uint8_t* data, size_t len);
     iphdr* getIPData() const ;
     uint32_t getDst() const ;
     void setDst(uint32_t addr);
@@ -22,4 +22,4 @@ private:
     iphdr* ip_data;
 };
 
-#endif // IP_H
+#endif // n_IP_H

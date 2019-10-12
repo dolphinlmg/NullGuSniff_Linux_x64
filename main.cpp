@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Class/Packet/n_tcp.h"
-#include "Class/Packet/packet.h"
+#include "Class/Packet/n_packet.h"
 
 using namespace std;
 
@@ -38,7 +38,7 @@ static uint8_t packet_data[] = "\x88\x36\x6c\xa7\x7a\xbe\x38\x00\x25\x56\x34\x84
 static size_t packet_len = 493;
 
 int main() {
-    Frame* tmp = Packet::recognizePacket(packet_data, packet_len);
+    n_Frame* tmp = n_Packet::recognizePacket(packet_data, packet_len);
     cout << tmp->what() << endl;
     return 0;
 }

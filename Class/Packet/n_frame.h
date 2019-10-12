@@ -4,13 +4,13 @@
 #include <cstring>
 #include <string>
 
-class Frame
+class n_Frame
 {
 public:
-    Frame();
-    Frame(uint8_t* data, size_t len);
-    Frame(const uint8_t* data, size_t len);
-    virtual ~Frame();
+    n_Frame();
+    n_Frame(uint8_t* data, size_t len);
+    n_Frame(const uint8_t* data, size_t len);
+    virtual ~n_Frame();
     void setLength(size_t len);
     size_t getLength() const ;
     void setFrameData(uint8_t* data, size_t len);
