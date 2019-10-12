@@ -11,6 +11,7 @@ SOURCES += \
     Class/Packet/n_packet.cpp \
     Class/Packet/n_tcp.cpp \
     Class/n_Pcap/n_pcap.cpp \
+    Class/n_Pcap/n_pcap_data.cpp \
         main.cpp
 
 HEADERS += \
@@ -19,4 +20,5 @@ HEADERS += \
     Class/Packet/n_ip.h \
     Class/Packet/n_packet.h \
     Class/Packet/n_tcp.h \
-    Class/n_Pcap/n_pcap.h
+    Class/n_Pcap/n_pcap.h \
+    Class/n_Pcap/n_pcap_data.h
