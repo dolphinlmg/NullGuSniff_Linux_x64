@@ -17,7 +17,12 @@ int main() {
 
         cout << packet->what() << endl
              << n_Packet::dumpPacket(packet->getFrameData(), packet->getLength()) << endl;
-        dummy.sendPacket(packet->getFrameData(), packet->getLength());
+
+        if (packet->what() == "TCP") {
+            if (dynamic_cast<n_TCP*>(packet)->isTLS()) {
+                dummy.sendPacket(packet->getFrameData(), packet->getLength());
+            }
+        }
     }
     return 0;
 }
