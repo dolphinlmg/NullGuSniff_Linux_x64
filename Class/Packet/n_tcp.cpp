@@ -1,12 +1,12 @@
 #include "n_tcp.h"
 
-n_TCP::n_TCP() {}
-
-n_TCP::n_TCP(u_int8_t* data, size_t len) : n_IP(data, len) {
+// constructor with uint8_t*
+n_TCP::n_TCP(uint8_t* data, size_t len) : n_IP(data, len) {
     this->tcp_data = reinterpret_cast<tcphdr*>(reinterpret_cast<uint8_t*>(this->getIPData()) + this->getSizeOfIPHeader());
 }
 
-n_TCP::n_TCP(const u_int8_t* data, size_t len) : n_IP(data, len) {
+// constructor with const uint8_t*
+n_TCP::n_TCP(const uint8_t* data, size_t len) : n_IP(data, len) {
     this->tcp_data = reinterpret_cast<tcphdr*>(this->getIPData() + this->getSizeOfIPHeader());
 }
 

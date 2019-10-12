@@ -2,7 +2,8 @@
 #include <iostream>
 #include <stdio.h>
 
-n_Frame* n_Packet::recognizePacket(uint8_t* data, size_t len) {
+// return suitable packet object with const uint8_t*
+n_Frame* n_Packet::recognizePacket(const uint8_t* data, size_t len) {
     n_Frame* ret = new n_Ethernet(data, len);
     if (dynamic_cast<n_Ethernet*>(ret)->getEthType() == ntohs(0x0800)){
         delete ret;
@@ -15,6 +16,7 @@ n_Frame* n_Packet::recognizePacket(uint8_t* data, size_t len) {
     return ret;
 }
 
+// hex dump
 template<class Elem, class Traits>
 inline void hex_dump(const void* aData, std::size_t aLength, std::basic_ostream<Elem, Traits>& aStream, std::size_t aWidth = 16)
 {
@@ -55,6 +57,7 @@ inline void hex_dump(const void* aData, std::size_t aLength, std::basic_ostream<
     }
 }
 
+// dump packet with const uint8_t*
 std::string n_Packet::dumpPacket(const uint8_t* data, size_t len) {
     std::stringstream ss;
     hex_dump(data, len, ss);

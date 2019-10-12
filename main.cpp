@@ -12,7 +12,10 @@ int main() {
         int res = pcap_1.getNextPacket();
         if (res == 0) continue;
         if (res == -1 || res == -2) break;
-        cout << n_Packet::dumpPacket(pcap_1.getPacketData(), pcap_1.getPacketLength()) << endl;
+        n_Frame* packet = n_Packet::recognizePacket(pcap_1.getPacketData(), pcap_1.getPacketLength());
+
+        cout << packet->what() << endl
+             << n_Packet::dumpPacket(packet->getFrameData(), packet->getLength()) << endl;
     }
     return 0;
 }

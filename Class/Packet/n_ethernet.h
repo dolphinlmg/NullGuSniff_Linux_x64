@@ -6,7 +6,6 @@
 
 class n_Ethernet : public n_Frame {
 public:
-    n_Ethernet();
     n_Ethernet(uint8_t* data, size_t len);
     n_Ethernet(const uint8_t* data, size_t len);
     ether_header* getEthernetHeader() const ;

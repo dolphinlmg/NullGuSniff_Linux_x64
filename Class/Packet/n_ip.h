@@ -6,7 +6,6 @@
 class n_IP : public n_Ethernet
 {
 public:
-    n_IP();
     n_IP(uint8_t* data, size_t len);
     n_IP(const uint8_t* data, size_t len);
     iphdr* getIPData() const ;

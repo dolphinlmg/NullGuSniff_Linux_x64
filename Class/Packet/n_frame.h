@@ -14,8 +14,9 @@ public:
     void setLength(size_t len);
     size_t getLength() const ;
     void setFrameData(uint8_t* data, size_t len);
+    void setFrameData(const uint8_t* data, size_t len);
     uint8_t* getFrameData() const ;
-    virtual std::string what() const { return "Frame"; }
+    virtual std::string what() const { return "Frame"; } //return name of class
 
 private:
     size_t length;
