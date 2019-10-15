@@ -1,5 +1,7 @@
 #ifndef N_MAIN_H
 #define N_MAIN_H
+#include <iostream>
+#include <signal.h>
 #include "Class/Packet/n_tcp.h"
 #include "Class/Packet/n_packet.h"
 #include "Class/n_Pcap/n_pcap.h"

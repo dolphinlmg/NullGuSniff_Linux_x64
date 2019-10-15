@@ -1,5 +1,3 @@
-#include <iostream>
-#include <signal.h>
 #include "n_main.h"
 
 int main() {
