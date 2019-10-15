@@ -21,4 +21,5 @@ HEADERS += \
     Class/Packet/n_packet.h \
     Class/Packet/n_tcp.h \
     Class/n_Pcap/n_pcap.h \
-    Class/n_Pcap/n_pcap_data.h
+    Class/n_Pcap/n_pcap_data.h \
+    n_main.h

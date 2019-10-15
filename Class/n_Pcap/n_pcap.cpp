@@ -15,8 +15,8 @@ n_Pcap::~n_Pcap() {
 }
 
 // send packet with handle
-int n_Pcap::sendPacket(const uint8_t* packet_content, int len) const {
-    return pcap_sendpacket(this->handle, packet_content, len);
+int n_Pcap::sendPacket(const uint8_t* packet_content, uint32_t len) const {
+    return pcap_sendpacket(this->handle, packet_content, static_cast<int>(len));
 }
 
 // receve packet in header, packet
@@ -35,8 +35,22 @@ const uint8_t* n_Pcap::getPacketData() {
 }
 
 // return packet length
-int n_Pcap::getPacketLength(){
+uint32_t n_Pcap::getPacketLength(){
     if (this->header != nullptr)
-        return static_cast<int>(this->header->len);
+        return this->header->len;
     return 0;
+}
+
+n_Frame* n_Pcap::recognizePacket() {
+    n_Frame* ret = new n_Ethernet(this->packet, this->header);
+    if (dynamic_cast<n_Ethernet*>(ret)->getEthType() == ntohs(0x0800)){
+        delete ret;
+        ret = new n_IP(this->packet, this->header);
+        if (dynamic_cast<n_IP*>(ret)->getProtocol() == 6){
+            delete ret;
+            ret = new n_TCP(this->packet, this->header);
+        }
+    }
+    return ret;
+
 }

@@ -6,11 +6,11 @@
 class n_TCP : public n_IP
 {
 public:
-    n_TCP(uint8_t* data, int len);
-    n_TCP(const uint8_t* data, int len);
+    n_TCP(uint8_t* data, pcap_pkthdr* header);
+    n_TCP(const uint8_t* data, pcap_pkthdr* header);
     tcphdr* getTcpData() const;
-    int getSizeOfTcpHeader() const;
-    bool isTLS() const;
+    uint32_t getSizeOfTcpHeader() const;
+    bool isTLS() const ;
     std::string what() const override { return "TCP"; }
     //TODO: Add Methods
 

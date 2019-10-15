@@ -1,12 +1,12 @@
 #include "n_ip.h"
 
 // constructor with uint8_t*
-n_IP::n_IP(uint8_t* data, int len) : n_Ethernet (data, len){
+n_IP::n_IP(uint8_t* data, pcap_pkthdr* header) : n_Ethernet (data, header){
     this->ip_data = reinterpret_cast<iphdr*>(this->getFrameData() + sizeof(ether_header));
 }
 
 // constructor with const uint8_t*
-n_IP::n_IP(const uint8_t* data, int len) : n_Ethernet (data, len){
+n_IP::n_IP(const uint8_t* data, pcap_pkthdr* header) : n_Ethernet (data, header){
     this->ip_data = reinterpret_cast<iphdr*>(this->getFrameData() + sizeof(ether_header));
 }
 
@@ -41,6 +41,6 @@ uint8_t n_IP::getProtocol() const {
 }
 
 // set protocol number of ip header
-int n_IP::getSizeOfIPHeader() const {
+uint32_t n_IP::getSizeOfIPHeader() const {
     return (this->ip_data->ihl & 0xf) * 4;
 }
