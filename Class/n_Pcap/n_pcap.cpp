@@ -3,8 +3,10 @@
 // constructor that open pcap live and initialize member variables
 n_Pcap::n_Pcap(const char* dev) {
     this->handle = pcap_open_live(dev, BUFSIZ, 1, 1, this->errBuf);
-    if (handle == nullptr)
+    if (handle == nullptr) {
         std::cerr << "Cannot open device: " << dev << std::endl;
+        exit(1);
+    }
     this->header = nullptr;
     this->packet = nullptr;
 }
