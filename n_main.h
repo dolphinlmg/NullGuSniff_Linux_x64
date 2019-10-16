@@ -9,9 +9,11 @@
 
 using namespace std;
 
+// namespace for main
 namespace MAIN {
     static n_Pcap_Data* file;
 
+    // signal handler for sigint
     [[ noreturn ]] void handler(int s) {
         cout << endl << "Signal Captured: " << s
              << endl << "Exporting to file..." << endl;

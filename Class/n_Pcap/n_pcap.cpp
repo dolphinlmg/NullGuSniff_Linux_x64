@@ -41,6 +41,7 @@ uint32_t n_Pcap::getPacketLength(){
     return 0;
 }
 
+// return appropriate packet object
 n_Frame* n_Pcap::recognizePacket() {
     n_Frame* ret = new n_Ethernet(this->packet, this->header);
     if (dynamic_cast<n_Ethernet*>(ret)->getEthType() == ntohs(0x0800)){
