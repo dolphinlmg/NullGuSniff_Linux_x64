@@ -28,3 +28,11 @@ bool n_TCP::isTLS() const {
     uint8_t* tmp = reinterpret_cast<uint8_t*>(this->getTcpData()) + this->getSizeOfTcpHeader();
     return (*tmp >= 0x14) && (*tmp <= 0x17);
 }
+
+bool n_TCP::isFilteredPort(std::vector<unsigned short> v) const {
+    for (auto a : v) {
+        if (ntohs(this->tcp_data->th_dport) == a || ntohs(this->tcp_data->th_sport) == a)
+            return true;
+    }
+    return false;
+}
