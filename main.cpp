@@ -9,9 +9,6 @@ int main() {
     // read ports from 'ports.ng'
     readPortsFromFile();
 
-    // register signal interrupt handler
-    //signal(SIGINT, &handler);
-
     while (true){
         // get next packet from wlp0s20f3
         int res = wlan0.getNextPacket();
