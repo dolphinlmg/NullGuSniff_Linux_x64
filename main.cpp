@@ -10,7 +10,7 @@ int main() {
     readPortsFromFile();
 
     while (true){
-        // get next packet from wlp0s20f3
+        // get next packet from wlan0
         int res = wlan0.getNextPacket();
         if (res == 0) continue;
         if (res == -1 || res == -2) break;
