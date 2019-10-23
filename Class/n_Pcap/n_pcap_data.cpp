@@ -47,27 +47,7 @@ bool n_Pcap_Data::push_packet(n_Frame* packet) {
 
 // export to file
 bool n_Pcap_Data::exportToFile() {
-    try {
-        if (packetList.size() != packetHeader.size()) return false;
-
-        // write file header
-        this->os.write(reinterpret_cast<const char*>(this->fileHeader), sizeof(pcap_file_header));
-
-        for (size_t i = 0; i < packetList.size(); i++) {
-            // write packet header
-            this->os.write(reinterpret_cast<const char*>(packetHeader.at(i)), sizeof(n_pcap_fpkthdr));
-
-            // write packet data
-            this->os.write(reinterpret_cast<const char*>(packetList.at(i)->getFrameData()), signed(packetHeader.at(i)->orig_len));
-        }
-
-        // close ofstream
-        this->os.close();
-    } catch (std::exception& ex) {
-        std::cerr << ex.what() << std::endl;
-        return false;
-    }
-    return true;
+    this->os.flush();
 }
 
 n_Pcap_Data::~n_Pcap_Data() {

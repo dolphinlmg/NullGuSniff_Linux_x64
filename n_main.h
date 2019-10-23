@@ -43,6 +43,14 @@ namespace MAIN {
        return true;
     }
 
+    void init() {
+        // read ports from 'ports.ng'
+        readPortsFromFile();
+
+        // register signal handler
+        signal(SIGINT, handler);
+    }
+
 }
 
 using namespace MAIN;

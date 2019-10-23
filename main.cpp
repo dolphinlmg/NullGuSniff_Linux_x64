@@ -6,8 +6,7 @@ int main() {
 
     file = new n_Pcap_Data("./test.pcap");
 
-    // read ports from 'ports.ng'
-    readPortsFromFile();
+    init();
 
     while (true){
         n_Frame* packet;
