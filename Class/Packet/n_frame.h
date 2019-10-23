@@ -1,6 +1,8 @@
 #ifndef FRAME_H
 #define FRAME_H
+#include <iostream>
 #include <stdint.h>
+#include <sstream>
 #include <cstring>
 #include <string>
 #include <pcap/pcap.h>
@@ -18,6 +20,7 @@ public:
     uint8_t* getFrameData() const ;
     void setFrameHeader(pcap_pkthdr* header);
     pcap_pkthdr* getFrameHeader();
+    std::string dumpPacket();
     virtual std::string what() const { return "Frame"; } //return name of class
 
 private:

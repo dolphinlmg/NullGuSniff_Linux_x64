@@ -10,16 +10,14 @@ int main() {
     readPortsFromFile();
 
     while (true){
-        // get next packet from wlan0
-        int res = wlan0.getNextPacket();
+        n_Frame* packet;
+        int res = wlan0 >> packet;
         if (res == 0) continue;
-        if (res == -1 || res == -2) break;
+        else if (res == -1 || res == -2) break;
 
-        // get appropriate object
-        n_Frame* packet = wlan0.recognizePacket();
         // dump packet data
-        cout << packet->what() << endl << ": " << packet->getLength() << endl
-             << n_Packet::dumpPacket(packet->getFrameData(), packet->getLength()) << endl;
+        cout << packet->what() << ": " << packet->getLength() << endl
+             << packet->dumpPacket() << endl;
 
         // continue if packet has filtered ports
         if (packet->what() == "TCP") {
@@ -29,7 +27,7 @@ int main() {
         // only not filtered packet
 
         // send to another interface
-        dummy.sendPacket(packet->getFrameData(), packet->getLength());
+        dummy << packet;
 
         // push&save packet
         file->push_packet(packet);
