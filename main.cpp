@@ -15,8 +15,7 @@ int main() {
         else if (res == -1 || res == -2) break;
 
         // dump packet data
-        cout << packet->what() << ": " << packet->getLength() << endl
-             << packet->dumpPacket() << endl;
+        cout << packet;
 
         // continue if packet has filtered ports
         if (packet->what() == "TCP") {
@@ -29,8 +28,7 @@ int main() {
         dummy << packet;
 
         // push&save packet
-        file->push_packet(packet);
-
+        *file << packet;
     }
     return 0;
 }

@@ -46,10 +46,14 @@ bool n_Pcap_Data::push_packet(n_Frame* packet) {
 }
 
 // export to file
-bool n_Pcap_Data::exportToFile() {
+void n_Pcap_Data::exportToFile() {
     this->os.flush();
 }
 
 n_Pcap_Data::~n_Pcap_Data() {
     this->os.close();
+}
+
+bool n_Pcap_Data::operator<<(n_Frame* &packet) {
+    return this->push_packet(packet);
 }

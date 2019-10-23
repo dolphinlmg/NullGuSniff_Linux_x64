@@ -22,6 +22,7 @@ public:
     pcap_pkthdr* getFrameHeader();
     std::string dumpPacket();
     virtual std::string what() const { return "Frame"; } //return name of class
+    friend std::ostream& operator<<(std::ostream& os, n_Frame* &packet);
 
 private:
     pcap_pkthdr* header;

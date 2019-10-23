@@ -34,7 +34,8 @@ public:
     n_Pcap_Data(const char* fileName);
     ~n_Pcap_Data();
     bool push_packet(n_Frame* packet);
-    bool exportToFile();
+    void exportToFile();
+    bool operator<<(n_Frame* &packet);
 
 private:
     const char* fileName;
