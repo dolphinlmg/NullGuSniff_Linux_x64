@@ -2,7 +2,7 @@
 
 int main() {
     n_Pcap wlan0("wlan0");
-    n_Pcap eth0("dum0");
+    n_Pcap lo("dum0");
 
     file = new n_Pcap_Data("./test.pcap");
 
@@ -18,20 +18,32 @@ int main() {
         // get appropriate object
         n_Frame* packet = wlan0.recognizePacket();
 
-        // dump packet data
-        cout << packet->what() << endl
-             << n_Packet::dumpPacket(packet->getFrameData(), packet->getLength()) << endl;
-
         // continue if packet has filtered ports
         if (packet->what() == "TCP") {
-            if (dynamic_cast<n_TCP*>(packet)->isFilteredPort(ports)) continue;
+            n_TCP* tmp = dynamic_cast<n_TCP*>(packet);
+            if (!tmp->isFilteredPort(ports)) continue;
+
+            // only filtered packet
+
+            // dump packet data
+            cout << packet->what() << endl << ": " << packet->getLength() << endl
+                 << n_Packet::dumpPacket(packet->getFrameData(), packet->getLength()) << endl;
+            //tmp->setIPDst(htonl(0x7f000001));
+            if(tmp->getLength() == 60)
+                cout << "hello" << endl;
+            tmp->setIPChecksum(tmp->calcIPChecksum());
+            tmp->setTCPChecksum(tmp->calcTCPChecksum());
+            // dump packet data
+            cout << packet->what() << endl << ": " << packet->getLength() << endl
+                 << n_Packet::dumpPacket(packet->getFrameData(), packet->getLength()) << endl;
         }
+        // only filtered packet
 
         // push&save packet
         file->push_packet(packet);
 
         // send to another interface
-        eth0.sendPacket(packet->getFrameData(), packet->getLength());
+        lo.sendPacket(packet->getFrameData(), packet->getLength());
     }
     return 0;
 }

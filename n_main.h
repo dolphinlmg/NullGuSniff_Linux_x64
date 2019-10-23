@@ -13,7 +13,7 @@ using namespace std;
 // namespace for main
 namespace MAIN {
     static n_Pcap_Data* file;
-    static vector<unsigned short> ports;
+    static vector<uint16_t> ports;
     static const char* portFileName = "ports.ng";
 
     // signal handler for sigint
@@ -29,7 +29,7 @@ namespace MAIN {
             ifstream is(portFileName, ios::in);
             if (!is.is_open())
                 return false;
-            unsigned short tmp;
+            uint16_t tmp;
             while(!is.eof()){
                 is >> tmp;
                 if (is.good())
