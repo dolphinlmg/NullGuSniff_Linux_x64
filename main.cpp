@@ -9,26 +9,44 @@ int main() {
     init();
 
     while (true){
-        n_Frame* packet;
-        int res = wlan0 >> packet;
-        if (res == 0) continue;
-        else if (res == -1 || res == -2) break;
+        // get next packet from interfaces
+        n_Frame *input, *output;
+        int input_res = wlan0 >> input;
+        int output_res = dummy >> output;
 
-        // dump packet data
-        cout << packet;
+        // break if error occured
+        if (input_res == -1 || input_res == -2 || output_res == -1 || output_res == -2) break;
 
-        // continue if packet has filtered ports
-        if (packet->what() == "TCP") {
-            n_TCP* tmp = dynamic_cast<n_TCP*>(packet);
-            if (tmp->isFilteredPort(ports)) continue;
+        // if input packet captured
+        if (input_res != 0) {
+            dynamic_cast<n_Ethernet*>(input)->setEthDst(reinterpret_cast<const uint8_t*>("\xff\xff\xff\xff\xff\xff"));
+            if (input->what() == "TCP"){
+                n_TCP* input_tcp = dynamic_cast<n_TCP*>(input);
+
+                if (!input_tcp->isFilteredDstPort(ports)) {
+                    input_tcp->setIPSrc(parseIP("172.203.0.22"));
+                    input_tcp->setProferChecksum();
+                    dummy << input;
+                }
+            }
+            *file << input;
         }
-        // only not filtered packet
 
-        // send to another interface
-        dummy << packet;
+        // if output packet captured
+        if (output_res != 0) {
+            dynamic_cast<n_Ethernet*>(output)->setEthDst(reinterpret_cast<const uint8_t*>("\xff\xff\xff\xff\xff\xff"));
+            if (output->what() == "TCP"){
+                n_TCP* output_tcp = dynamic_cast<n_TCP*>(output);
 
-        // push&save packet
-        *file << packet;
+                if (!output_tcp->isFilteredPort(ports)) {
+                    output_tcp->setIPDst(parseIP("172.24.1.102"));
+                    output_tcp->setProferChecksum();
+                    dummy << output;
+                }
+            }
+
+            *file << output;
+        }
     }
     return 0;
 }
