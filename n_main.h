@@ -24,6 +24,7 @@ namespace MAIN {
         exit(0);
     }
 
+    // read filtering port from file 'ports.ng'
     bool readPortsFromFile() {
         try {
             ifstream is(portFileName, ios::in);
@@ -54,18 +55,35 @@ namespace MAIN {
         signal(SIGINT, handler);
     }
 
+    // return uint32_t from string ip
     uint32_t parseIP(const char* ip) {
         uint32_t ret = 0;
         uint8_t* p = reinterpret_cast<uint8_t*>(&ret);
         for (size_t i = 0; i < strlen(ip); i++) {
-            if(*(ip+i) == '.')
+            if (*(ip + i) == '.')
                 p++;
-            else{
+            else {
                 *p *= 10;
-                *p += *(ip+i) - '0';
+                *p += *(ip + i) - '0';
             }
         }
         return ret;
+    }
+
+    // return uint8_t* from string mac
+    // string mac should be base on lower case
+    uint8_t* parseMAC(const char* mac) {
+        uint8_t* ret = new uint8_t[6] {0, };
+        for (size_t i = 0; i < strlen(mac); i++) {
+            if (*(mac + i) == ':')
+                ret++;
+            else {
+                *ret *= 16;
+                *ret += (*(mac + i) >= 'a') ? (*(mac + i) - 'a' + 10) : (*(mac + i) - '0');
+            }
+        }
+
+        return ret - 5;
     }
 
 }
