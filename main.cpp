@@ -24,6 +24,7 @@ int main() {
                 n_IP* input_ip = dynamic_cast<n_IP*>(input);
                 input_ip->setIPDst(parseIP("123.24.38.100"));
                 input_ip->setProferIPChecksum();
+                if (input->what() == "TCP") dynamic_cast<n_TCP*>(input)->setProferTCPChecksum();
             }
 
             cout <<input;
@@ -41,6 +42,7 @@ int main() {
                 n_IP* output_ip = dynamic_cast<n_IP*>(output);
                 output_ip->setIPSrc(parseIP("172.203.0.9"));
                 output_ip->setProferIPChecksum();
+                if (output->what() == "TCP") dynamic_cast<n_TCP*>(output)->setProferTCPChecksum();
             }
 
             cout << output;
