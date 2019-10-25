@@ -60,6 +60,10 @@ n_Frame* n_Pcap::recognizePacket() {
 // get next packet & recognize packet, returns result of getNextPacket()
 int n_Pcap::operator>>(n_Frame* &packet) {
     int ret = this->getNextPacket();
+    if (ret == -1 || ret == -2) {
+        std::cerr << "Error to get next packet" << std::endl;
+        exit(-1);
+    }
     packet = this->recognizePacket();
     return ret;
 }

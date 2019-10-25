@@ -102,9 +102,8 @@ uint16_t n_IP::calcIPChecksum() {
     struct iphdr* iph = new iphdr;
     memcpy(iph, this->ip_header, this->getSizeOfIPHeader());
     iph->check = 0;//set Checksum field 0
-
     uint16_t checksum = ip_checksum(reinterpret_cast<uint16_t*>(iph), iph->ihl*4);
-
+    delete iph;
     return checksum;
 }
 
