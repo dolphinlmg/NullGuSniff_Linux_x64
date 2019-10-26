@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <signal.h>
+#include <map>
 #include "Class/Packet/n_tcp.h"
 #include "Class/n_Pcap/n_pcap.h"
 #include "Class/n_Pcap/n_pcap_data.h"
@@ -11,10 +12,17 @@ using namespace std;
 
 // namespace for main
 namespace MAIN {
+    [[ noreturn ]] void handler(int);
+    bool readPortsFromFile();
+    bool createMacAddresses();
+    uint32_t parseIP(const char* ip);
+    uint8_t* parseMAC(const char* mac);
+
     static n_Pcap_Data* file;
     static vector<uint16_t> ports;
     static vector<pair<pair<uint32_t, uint32_t>, pair<uint16_t, uint16_t>>> sessions;
     static const char* portFileName = "ports.ng";
+    static map<string, uint8_t*> macs;
 
     // signal handler for sigint
     [[ noreturn ]] void handler(int s) {
@@ -42,6 +50,19 @@ namespace MAIN {
            return false;
         }
        return true;
+    }
+
+    bool createMacAddresses() {
+        try {
+            macs.insert(make_pair("input_mac", parseMAC("00:e0:4c:61:54:a8")));
+            macs.insert(make_pair("target_mac", parseMAC("00:e0:4c:61:55:40")));
+            macs.insert(make_pair("output_mac", parseMAC("88:36:6c:a7:7a:be")));
+            macs.insert(make_pair("gateway_mac", parseMAC("98:2c:bc:6d:42:5f")));
+        } catch (exception& ex) {
+            cerr << ex.what() << endl;
+            return false;
+        }
+        return true;
     }
 
     void init() {
