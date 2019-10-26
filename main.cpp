@@ -27,7 +27,7 @@ int main() {
                 if (input->what() == "TCP") dynamic_cast<n_TCP*>(input)->setProferTCPChecksum();
             }
 
-            cout <<input;
+            cout << input;
             dum0 << input;
             *file << input;
         }
@@ -38,7 +38,7 @@ int main() {
             dynamic_cast<n_Ethernet*>(output)->setEthDst(parseMAC("88:36:6c:a7:7a:be"));
 
             // not filtered tcp, or just ip packet change ip address
-            if ((input->what() == "TCP" && !dynamic_cast<n_TCP*>(input)->isFilteredPort(ports)) || input->what() == "IP" ) {
+            if ((input->what() == "TCP" && !dynamic_cast<n_TCP*>(output)->isFilteredPort(ports)) || output->what() == "IP" ) {
                 n_IP* output_ip = dynamic_cast<n_IP*>(output);
                 output_ip->setIPSrc(parseIP("172.203.0.9"));
                 output_ip->setProferIPChecksum();
