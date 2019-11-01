@@ -22,7 +22,6 @@ namespace MAIN {
     static vector<uint16_t> ports;
     static vector<pair<pair<uint32_t, uint32_t>, pair<uint16_t, uint16_t>>> sessions;
     static const char* portFileName = "ports.ng";
-    static map<string, uint8_t*> macs;
 
     // signal handler for sigint
     [[ noreturn ]] void handler(int s) {
@@ -52,19 +51,6 @@ namespace MAIN {
        return true;
     }
 
-    bool createMacAddresses() {
-        try {
-            macs.insert(make_pair("input_mac", parseMAC("00:e0:4c:61:54:a8")));
-            macs.insert(make_pair("target_mac", parseMAC("00:e0:4c:61:55:40")));
-            macs.insert(make_pair("output_mac", parseMAC("88:36:6c:a7:7a:be")));
-            macs.insert(make_pair("gateway_mac", parseMAC("98:2c:bc:6d:42:5f")));
-        } catch (exception& ex) {
-            cerr << ex.what() << endl;
-            return false;
-        }
-        return true;
-    }
-
     void init() {
         // read ports from 'ports.ng'
         if (!readPortsFromFile()) {
@@ -74,6 +60,7 @@ namespace MAIN {
 
         // register signal handler
         signal(SIGINT, handler);
+
     }
 
     // return uint32_t from string ip
