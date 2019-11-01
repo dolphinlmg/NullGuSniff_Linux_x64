@@ -30,6 +30,13 @@ typedef struct {
     uint8_t severity_level;
     uint8_t description;
 } n_tls_alert;
+
+typedef struct n_pcap_file_packet_header {
+  uint32_t ts_sec;         // timestamp seconds
+  uint32_t ts_usec;        // timestamp microseconds
+  uint32_t incl_len;       // number of octets of packet saved in file
+  uint32_t orig_len;       // actual length of packet
+} n_pcap_fpkthdr;
 #pragma pack(pop)
 
 enum n_tls_handshake_type {

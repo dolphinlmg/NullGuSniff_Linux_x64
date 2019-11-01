@@ -5,28 +5,7 @@
 #include <fstream>
 #include <iostream>
 
-#include "Class/Packet/n_tcp.h"
-
-/*
-struct pcap_file_header {
-    bpf_u_int32 magic;
-    u_short version_major;
-    u_short version_minor;
-    bpf_int32 thiszone;	     // gmt to local correction
-    bpf_u_int32 sigfigs;	 // accuracy of timestamps
-    bpf_u_int32 snaplen;	 // max length saved portion of each pkt
-    bpf_u_int32 linktype;	 // data link type (LINKTYPE_*)
-};
-*/
-
-
-typedef struct n_pcap_file_packet_header {
-  uint32_t ts_sec;         // timestamp seconds
-  uint32_t ts_usec;        // timestamp microseconds
-  uint32_t incl_len;       // number of octets of packet saved in file
-  uint32_t orig_len;       // actual length of packet
-} n_pcap_fpkthdr;
-
+#include "Class/Packet/n_tls.h"
 
 class n_Pcap_Data
 {
