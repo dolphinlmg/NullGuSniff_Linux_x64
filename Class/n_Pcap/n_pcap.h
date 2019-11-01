@@ -2,7 +2,7 @@
 #define N_PCAP_H
 #include <pcap/pcap.h>
 #include <iostream>
-#include "Class/Packet/n_tcp.h"
+#include "Class/Packet/n_tls.h"
 
 class n_Pcap
 {
