@@ -1,7 +1,7 @@
 #include "n_main.h"
 
 int main() {
-    n_Pcap outer_interface("eth1");
+    n_Pcap outer_interface("wlan0");
     n_Pcap inner_interface("eth0");
 
     file = new n_Pcap_Data("./test.pcap");
@@ -16,14 +16,18 @@ int main() {
 
         // if input packet captured
         if (input_res != 0) {
-            cout << input;
+            if(input->what() == "TCP" || input->what().find("TLS") != string::npos){
+                cout << input;
+            }
             inner_interface << input;
             *file << input;
         }
 
         // if output packet captured
         if (output_res != 0) {
-            cout << output;
+            if(output->what() == "TCP" || output->what().find("TLS") != string::npos){
+                cout << output;
+            }
             outer_interface << output;
             *file << output;
         }
