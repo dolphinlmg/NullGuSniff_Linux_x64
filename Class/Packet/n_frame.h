@@ -6,6 +6,7 @@
 #include <cstring>
 #include <string>
 #include <pcap/pcap.h>
+#include "Class/Packet/n_structures.h"
 
 class n_Frame
 {

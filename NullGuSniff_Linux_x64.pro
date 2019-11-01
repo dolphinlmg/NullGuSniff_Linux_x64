@@ -18,6 +18,7 @@ HEADERS += \
     Class/Packet/n_ethernet.h \
     Class/Packet/n_frame.h \
     Class/Packet/n_ip.h \
+    Class/Packet/n_structures.h \
     Class/Packet/n_tcp.h \
     Class/Packet/n_tls.h \
     Class/n_Pcap/n_pcap.h \

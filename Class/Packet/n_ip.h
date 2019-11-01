@@ -8,7 +8,7 @@ class n_IP : public n_Ethernet
 public:
     n_IP(uint8_t* data, pcap_pkthdr* header);
     n_IP(const uint8_t* data, pcap_pkthdr* header);
-    iphdr* getIPData() const ;
+    iphdr* getIPHeader() const ;
     uint32_t getIPDst() const ;
     void setIPDst(uint32_t addr);
     uint32_t getIPSrc() const ;

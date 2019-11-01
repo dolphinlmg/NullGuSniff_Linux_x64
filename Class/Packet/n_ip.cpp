@@ -11,7 +11,7 @@ n_IP::n_IP(const uint8_t* data, pcap_pkthdr* header) : n_Ethernet (data, header)
 }
 
 // return iphdr*
-iphdr* n_IP::getIPData() const {
+iphdr* n_IP::getIPHeader() const {
     return this->ip_header;
 }
 

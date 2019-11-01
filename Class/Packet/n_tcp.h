@@ -5,13 +5,7 @@
 #include "n_ip.h"
 
 //#pragma pack(push, 1)
-typedef struct pseudoHeader {
-    uint32_t src;
-    uint32_t dst;
-    uint8_t reserved;
-    uint8_t protocol;
-    uint16_t tcplen;
-} pseudohdr;
+
 //#pragma pack(pop)
 
 class n_TCP : public n_IP
@@ -19,7 +13,7 @@ class n_TCP : public n_IP
 public:
     n_TCP(uint8_t* data, pcap_pkthdr* header);
     n_TCP(const uint8_t* data, pcap_pkthdr* header);
-    tcphdr* getTcpData() const;
+    tcphdr* getTcpHeader() const;
     uint32_t getSizeOfTcpHeader() const;
     bool isTLS() const ;
     bool isFilteredDstPort(std::vector<uint16_t> v) const;

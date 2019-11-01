@@ -3,16 +3,16 @@
 
 // constructor with uint8_t*
 n_TCP::n_TCP(uint8_t* data, pcap_pkthdr* header) : n_IP(data, header) {
-    this->tcp_header = reinterpret_cast<tcphdr*>(reinterpret_cast<uint8_t*>(this->getIPData()) + this->getSizeOfIPHeader());
+    this->tcp_header = reinterpret_cast<tcphdr*>(reinterpret_cast<uint8_t*>(this->getIPHeader()) + this->getSizeOfIPHeader());
 }
 
 // constructor with const uint8_t*
 n_TCP::n_TCP(const uint8_t* data, pcap_pkthdr* header) : n_IP(data, header) {
-    this->tcp_header = reinterpret_cast<tcphdr*>(reinterpret_cast<uint8_t*>(this->getIPData()) + this->getSizeOfIPHeader());
+    this->tcp_header = reinterpret_cast<tcphdr*>(reinterpret_cast<uint8_t*>(this->getIPHeader()) + this->getSizeOfIPHeader());
 }
 
 // return tcphdr*
-tcphdr* n_TCP::getTcpData() const {
+tcphdr* n_TCP::getTcpHeader() const {
     return this->tcp_header;
 }
 
@@ -25,7 +25,7 @@ uint32_t n_TCP::getSizeOfTcpHeader() const {
 bool n_TCP::isTLS() const {
     if (this->getLength() == sizeof(ethhdr) + this->getSizeOfIPHeader() + this->getSizeOfTcpHeader())
         return false;
-    uint8_t* tmp = reinterpret_cast<uint8_t*>(this->getTcpData()) + this->getSizeOfTcpHeader();
+    uint8_t* tmp = reinterpret_cast<uint8_t*>(this->getTcpHeader()) + this->getSizeOfTcpHeader();
     return (*tmp >= 0x14) && (*tmp <= 0x17);
 }
 
@@ -85,17 +85,17 @@ uint16_t n_TCP::in_checksum(uint16_t *ptr,int nbytes) {
 // setting up & calculate tcp checksum
 uint16_t n_TCP::calcTCPChecksum() {
     uint16_t dataLen = static_cast<uint16_t>(this->getLength() - sizeof(ethhdr) - this->getSizeOfIPHeader());
-    pseudohdr hdr = {this->getIPSrc(), this->getIPDst(), 0, this->getIPData()->protocol,
+    n_tcp_pseudohdr hdr = {this->getIPSrc(), this->getIPDst(), 0, this->getIPHeader()->protocol,
                      htons(dataLen)};
     tcphdr* tcp = reinterpret_cast<tcphdr*>(new uint8_t[dataLen]);
-    uint8_t* tmphdr = new uint8_t[sizeof(pseudohdr) + dataLen];
-    memcpy(tcp, this->getTcpData(), dataLen);
+    uint8_t* tmphdr = new uint8_t[sizeof(n_tcp_pseudohdr) + dataLen];
+    memcpy(tcp, this->getTcpHeader(), dataLen);
     tcp->check = 0;
 
-    memcpy(tmphdr, &hdr, sizeof(pseudohdr));
-    memcpy(tmphdr + sizeof(pseudohdr), tcp, dataLen);
+    memcpy(tmphdr, &hdr, sizeof(n_tcp_pseudohdr));
+    memcpy(tmphdr + sizeof(n_tcp_pseudohdr), tcp, dataLen);
 
-    uint16_t ret = in_checksum(reinterpret_cast<uint16_t*>(tmphdr), sizeof(pseudohdr) + dataLen);
+    uint16_t ret = in_checksum(reinterpret_cast<uint16_t*>(tmphdr), sizeof(n_tcp_pseudohdr) + dataLen);
 
     if (this->getFrameHeader()->len == 60)
         ret = ntohs(htons(ret) + 6);

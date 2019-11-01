@@ -52,6 +52,10 @@ n_Frame* n_Pcap::recognizePacket() {
         if (dynamic_cast<n_IP*>(ret)->getProtocol() == 6){
             delete ret;
             ret = new n_TCP(this->packet, this->header);
+            if (dynamic_cast<n_TCP*>(ret)->isTLS()) {
+                delete ret;
+                ret = new n_TLS(this->packet, this->header);
+            }
         }
     }
     return ret;
