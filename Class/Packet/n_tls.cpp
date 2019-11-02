@@ -52,5 +52,6 @@ std::string n_TLS::what() const {
     if (this->tls_alert != nullptr) return "TLS_Alert";
     else if (this->tls_cipher != nullptr) return "TLS_Cipher";
     else if (this->tls_handshake != nullptr) return "TLS_Handshake";
+    else if (this->tls_application_data != nullptr) return "TLS_Application_Data";
     return "TLS_Recognization_Error!";
 }
