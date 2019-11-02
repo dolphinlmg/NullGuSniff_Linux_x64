@@ -9,6 +9,9 @@
 #include "Class/n_Pcap/n_pcap_data.h"
 
 using namespace std;
+using n_tls_handshake_type::hsk_type;
+using n_tls_alert_severity::alert_sev;
+using n_tls_alert_descriptions::alert_desc;
 
 // namespace for main
 namespace MAIN {

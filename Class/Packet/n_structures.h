@@ -39,47 +39,57 @@ typedef struct n_pcap_file_packet_header {
 } n_pcap_fpkthdr;
 #pragma pack(pop)
 
-enum n_tls_handshake_type {
-    HELLO_REQUEST = 0,
-    CLIENT_HELLO,
-    SERVER_HELLO,
-    CERTIFICATION = 0xb,
-    SERVER_KEY_EXCHANGE,
-    CERTIFICATE_REQUEST,
-    SERVER_DONE,
-    CERTIFICATE_VERIFY,
-    CLIENT_KEY_EXCHANGE,
-    FINISHED = 0x14
-};
+namespace n_tls_handshake_type {
+    typedef enum n_tls_handshake_type {
+        TYPE_ERROR = -1,
+        HELLO_REQUEST = 0,
+        CLIENT_HELLO,
+        SERVER_HELLO,
+        CERTIFICATION = 0xb,
+        SERVER_KEY_EXCHANGE,
+        CERTIFICATE_REQUEST,
+        SERVER_DONE,
+        CERTIFICATE_VERIFY,
+        CLIENT_KEY_EXCHANGE,
+        FINISHED = 0x14
+    } hsk_type;
+}
 
-enum n_tls_alert_severity {
-    WARNING = 0x1,
-    FATAL
-};
+namespace n_tls_alert_severity {
+    typedef enum n_tls_alert_severity {
+        TYPE_ERROR = -1,
+        WARNING = 0x1,
+        FATAL
+    } alert_sev;
+}
 
-enum n_tls_alert_descriptions {
-    CLOSE_NOTIFY,
-    UNEXPECTED_MESSAGE = 0xa,
-    BAD_RECORD_MAC = 0x14,
-    DECOMPRESSION_FAILURE = 0x1e,
-    HANDSHAKE_FAILURE = 0x28,
-    NO_CERTIFICATE,
-    BAD_CERTIFICATE,
-    UNSUPPORTED_CERTIFICATE,
-    CERTIFICATE_REVOKED,
-    CERTIFICATE_EXPIRED,
-    CERTIFICATE_UNKNOWN,
-    ILLEGAL_PARAMETER,
-    UNKNOWN_CA,
-    ACCESS_DENIED,
-    DECODE_ERROR,
-    DECRYPT_ERROR,
-    EXPORT_RESTRICTION = 0x3c,
-    PROTOCOL_VERSION = 0x46,
-    INSUFFICIENT_SECURITY,
-    INTERNAL_ERROR = 0x50,
-    USER_CANCELLED = 0x5a,
-    NO_RENEGOTIATION = 0x64
-};
+namespace n_tls_alert_descriptions {
+    typedef enum n_tls_alert_descriptions {
+        TYPE_ERROR = -1,
+        CLOSE_NOTIFY = 0,
+        UNEXPECTED_MESSAGE = 0xa,
+        BAD_RECORD_MAC = 0x14,
+        DECOMPRESSION_FAILURE = 0x1e,
+        HANDSHAKE_FAILURE = 0x28,
+        NO_CERTIFICATE,
+        BAD_CERTIFICATE,
+        UNSUPPORTED_CERTIFICATE,
+        CERTIFICATE_REVOKED,
+        CERTIFICATE_EXPIRED,
+        CERTIFICATE_UNKNOWN,
+        ILLEGAL_PARAMETER,
+        UNKNOWN_CA,
+        ACCESS_DENIED,
+        DECODE_ERROR,
+        DECRYPT_ERROR,
+        EXPORT_RESTRICTION = 0x3c,
+        PROTOCOL_VERSION = 0x46,
+        INSUFFICIENT_SECURITY,
+        INTERNAL_ERROR = 0x50,
+        USER_CANCELLED = 0x5a,
+        NO_RENEGOTIATION = 0x64
+    } alert_desc;
+}
+
 
 #endif // N_STRUCTURES_H
