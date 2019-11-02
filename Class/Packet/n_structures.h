@@ -37,7 +37,17 @@ typedef struct n_pcap_file_packet_header {
   uint32_t incl_len;       // number of octets of packet saved in file
   uint32_t orig_len;       // actual length of packet
 } n_pcap_fpkthdr;
+
 #pragma pack(pop)
+
+namespace n_tls_record_type {
+    typedef enum n_tls_record_type {
+        CHANGE_CHIPER_SPEC = 0x14,
+        ALERT,
+        HANDSHAKE,
+        APPLICATION_DATA
+    } record_type;
+}
 
 namespace n_tls_handshake_type {
     typedef enum n_tls_handshake_type {
@@ -90,6 +100,5 @@ namespace n_tls_alert_descriptions {
         NO_RENEGOTIATION = 0x64
     } alert_desc;
 }
-
 
 #endif // N_STRUCTURES_H
