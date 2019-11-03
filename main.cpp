@@ -16,20 +16,35 @@ int main() {
 
         // if input packet captured
         if (input_res != 0) {
+            cout << input;
             if(input->what() == "TCP" || input->what().find("TLS") != string::npos){
+                n_TCP* input_tcp = dynamic_cast<n_TCP*>(input);
+                if (!input_tcp->isFilteredPort(ports)) {
+                    inner_interface << input;
+                    cout << input;
+                    *file << input;
+                }
+            } else {
+                inner_interface << input;
                 cout << input;
+                *file << input;
             }
-            inner_interface << input;
-            *file << input;
         }
 
         // if output packet captured
         if (output_res != 0) {
             if(output->what() == "TCP" || output->what().find("TLS") != string::npos){
+                n_TCP* output_tcp = dynamic_cast<n_TCP*>(output);
+                if (!output_tcp->isFilteredPort(ports)){
+                    outer_interface << output;
+                    cout << output;
+                    *file << output;
+                }
+            } else {
+                outer_interface << output;
                 cout << output;
+                *file << output;
             }
-            outer_interface << output;
-            *file << output;
         }
     }
 }
