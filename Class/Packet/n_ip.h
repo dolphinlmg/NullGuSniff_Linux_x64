@@ -13,6 +13,7 @@ public:
     void setIPDst(uint32_t addr);
     uint32_t getIPSrc() const ;
     void setIPSrc(uint32_t addr);
+    void setIPSize(uint16_t length);
     uint8_t getProtocol() const ;
     uint32_t getSizeOfIPHeader() const ;
     std::string what() const override { return "IP"; }

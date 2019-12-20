@@ -44,6 +44,7 @@ void n_Frame::setFrameData(uint8_t* data, uint32_t len){
     }
     this->data = new uint8_t [len];
     memcpy(this->data, data, static_cast<size_t>(len));
+    this->header->len = len;
 }
 
 // set data with const uint8_t*
@@ -53,6 +54,7 @@ void n_Frame::setFrameData(const uint8_t* data, uint32_t len){
     }
     this->data = new uint8_t [len];
     memcpy(this->data, data, static_cast<size_t>(len));
+    this->header->len = len;
 }
 
 // return data

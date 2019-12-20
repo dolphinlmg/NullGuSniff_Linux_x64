@@ -133,7 +133,7 @@ std::ostream& operator<<(std::ostream& os, n_TLS* &packet) {
     os << packet->what() << "\n RECORD TYPE: ";
     for (size_t i = 0; i < packet->getTlsRecord().size(); i++)
         os << signed(packet->getTlsRecordType(i)) << ", ";
-    os << "\b\b \n size:  " << packet->getLength() << " hex: 0x" << std::hex << packet->getLength() << std::dec<< std::endl
+    os << "\b\b \n size: " << packet->getLength() << " hex: 0x" << std::hex << packet->getLength() << std::dec<< std::endl
        << packet->dumpPacket() << std::endl;
     return os;
 }

@@ -35,6 +35,10 @@ void n_IP::setIPSrc(uint32_t addr){
     this->ip_header->saddr = addr;
 }
 
+void n_IP::setIPSize(uint16_t length) {
+    this->ip_header->tot_len = htons(length);
+}
+
 // return protocol number of ip header
 uint8_t n_IP::getProtocol() const {
     return this->ip_header->protocol;
